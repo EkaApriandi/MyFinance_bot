@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+.venv/
+env/
+venv/
+
+# SQLite Database
+*.db
+*.sqlite3
+
+# Google Credentials
+credentials.json
+
+# Matplotlib cache
+.matplotlib/
