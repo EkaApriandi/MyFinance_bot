@@ -10,24 +10,19 @@ def generate_text_progress_bar(percent: float, length: int = 8) -> str:
     return f"`{bar}` {percent:.1f}%"
 
 def generate_budget_progress(current_expense: float, monthly_budget: float) -> Optional[str]:
-    """Menghasilkan teks status dan bar progres budget bulanan beserta peringatan jika mendekati batas."""
     if monthly_budget <= 0:
         return None
 
     percent = (current_expense / monthly_budget) * 100.0
-    bar = generate_text_progress_bar(percent, length=8)
+    bar = generate_text_progress_bar(percent, length=6)
     
+    alert = ""
     if percent >= 100.0:
-        alert = "\n🚨 <b>Peringatan:</b> Pengeluaran telah melebihi batas budget bulanan Anda!"
+        alert = "\n⚠️ <i>Budget bulanan terlampaui!</i>"
     elif percent >= 80.0:
-        alert = "\n⚠️ <b>Perhatian:</b> Pengeluaran sudah mencapai 80%+ dari budget bulanan!"
-    else:
-        alert = ""
+        alert = "\n⚠️ <i>Mendekati batas budget (80%+).</i>"
 
-    return (
-        f"🎯 <b>Target Budget:</b> {format_rupiah(current_expense)} / {format_rupiah(monthly_budget)}\n"
-        f"   {bar}{alert}"
-    )
+    return f"🎯 Budget: <code>{format_rupiah(current_expense)}</code> / <code>{format_rupiah(monthly_budget)}</code>\n   {bar}{alert}"
 
 def generate_rekap_chart(
     breakdown: List[Dict],
